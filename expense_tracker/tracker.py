@@ -1,5 +1,6 @@
 import datetime
 import json
+import time
 import os
 
 expenses = []
@@ -8,6 +9,9 @@ last_saved = []
 APP_DIR = os.path.join(os.path.expanduser("~"), ".expense_tracker")
 os.makedirs(APP_DIR, exist_ok=True)
 DATA_FILE = os.path.join(APP_DIR, "expenses.json")
+
+def clear_screen():
+    print("\033[H\033[J", end="")
 
 def get_positive_float(prompt: str) -> float:
     while True:
@@ -150,8 +154,11 @@ def main():
         choice = input("Enter your choice (1-8): ").strip()
 
         if not expenses and choice in ('2', '3', '4', '5'):
+            clear_screen()
             print("No expenses found. Add expense (option 1) or load a saved file (option 7).")
             continue
+
+        clear_screen()
 
         if choice == '1':
             add_expense()
@@ -176,6 +183,8 @@ def main():
                 save_choice = input("Do you want to save your expenses before exiting? (y/n): ").strip().lower()
                 if save_choice == 'y':
                     save_to_JSON()
+                    time.sleep(1)
+            clear_screen()
             print("Exiting the Expense Tracker. Goodbye!")
             break
         else:
