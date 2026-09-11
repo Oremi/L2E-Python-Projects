@@ -55,8 +55,7 @@ def run_quiz(questions_data: list):
                 score += 1
                 print("Correct!")
             else:
-                correct_option = question_list["options"][question_list["answer"]]
-                print(f"incorrect! The correct answer is: {correct_option}")
+                print(f"incorrect! The correct answer is: {question_list['answer']}")
 
             time.sleep(2)
 
